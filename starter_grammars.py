@@ -73,7 +73,7 @@ def hs_pnh_vpa():
     g = '''
     S -> NPh VPa
 
-    NPh -> Det Adjhs PgN
+    NPh -> Det Advhs Adjhs PgN
     
     PgN ->  PPs | PPp 
 
@@ -86,7 +86,7 @@ def hs_nph_vpb():
     g = '''
     S -> NPh VPb
 
-    NPh -> Adjhs PgN | Det Adjhs PgN | Advhs Adjhs PgN | Det Advhs PgN | Det Advhs Adjhs PgN  
+    NPh -> Advhs Adjhs PgN
     
     PgN ->  PPs | PPp 
 
@@ -94,11 +94,12 @@ def hs_nph_vpb():
     '''
     return g
 
+# Adjhs PgN | Det Adjhs PgN | Advhs Adjhs PgN | Det Advhs PgN | Det Advhs Adjhs PgN  
 def hs_nph_vpc():
     g = '''
     S -> NPh VPc
 
-    NPh -> Adjhs PgN | Det Adjhs PgN | Advhs Adjhs PgN | Det Advhs PgN | Det Advhs Adjhs PgN  
+    NPh -> Det Advhs Adjhs PgN  
     
     PgN ->  PPs | PPp 
 
