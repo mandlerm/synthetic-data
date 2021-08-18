@@ -41,16 +41,21 @@ def hs_grammar_false():
 # Adjhs PgN | Det Adjhs PgN | Advhs Adjhs PgN | Det Advhs PgN | Det Advhs Adjhs PgN  
 def hs_grammar():
     g = '''
-    S -> Pre NPh | NPh VPa | NPh VPb | NPh VPc
-
-    NPh -> Adjhs PgN | Det Adjhs PgN | Advhs Adjhs PgN | Det Advhs PgN | Det Advhs Adjhs PgN  
-    
+    S -> Pre_hs NPh | NPh VPa_past_benign | Nh_clean HS_clause | Vt_hs_present PPp | Adj_hs PPp
     PgN ->  PPs | PPp 
+    Noun_clean -> Animals | Food | Humans
+    Animals -> N_animals_single | N_animals_plural
+    Food -> N_food_single | N_food_plural
+    Humans -> N_human_single | N_human_plural
 
-    VPa -> Vt PPs | Vt Ns | Vt PPs Adjhs | Vt Ns Adjhs 
-    VPb -> Vi | Vi Advhs
-    VPc -> Vd Nhs Ns | Vd Nhs Ns Advhs
+    NPh -> Adj_hs PgN | Det Adj_hs PgN | Adv_hs Adj_hs PgN | Det Adv_hs Adj_hs PgN 
+    VPa_past_benign -> Vt_clean_past Noun_clean Adv_clean | Vt_clean_past PgN | Vt_clean_past Noun_clean | Vt_clean_past Det Adj_hs Noun_clean
+
+    Nh_clean -> Det Humans Vt_clean_past  
+    HS_clause -> Det Adj_hs PgN | Det N_hate_speech_single | Det N_hate_speech_plural | Vt_hs_past PgN | Vt_hs_past Det Adj_hs PgN 
+    
     '''
+
     return g
 
 # Adjhs PgN | Det Adjhs PgN | Advhs Adjhs PgN | Det Advhs PgN | Det Advhs Adjhs PgN 

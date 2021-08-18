@@ -63,15 +63,38 @@ def _hs_testing():
 
 
 def _setup_clean_grammar():
-    str = sg.clean_grammar() + word_strings.pre_clean() + word_strings.determiners() + word_strings.noun_things_single() + word_strings.noun_things_plural() + word_strings.noun_humans_single() + word_strings.noun_humans_plural() + word_strings.adjectives_clean() + word_strings.adverbs_clean() + word_strings.vt_clean() + word_strings.vi_clean() + word_strings.vd_clean()
+    str = sg.clean_grammar() 
+    + word_strings.pre_clean() 
+    + word_strings.determiners() 
+    + word_strings.noun_things_single() 
+    + word_strings.noun_things_plural() 
+    + word_strings.noun_humans_single() 
+    + word_strings.noun_humans_plural() 
+    + word_strings.adjectives_clean() 
+    + word_strings.adverbs_clean() 
+    + word_strings.vt_clean() 
+    + word_strings.vi_clean() 
+    + word_strings.vd_clean()
     return str
 
 def _setup_hs_false_grammar():
-    str = sg.hs_grammar_false() + word_strings.pre_hs_false() + word_strings.determiners() + word_strings.noun_things_single() + word_strings.noun_things_plural() + word_strings.noun_humans_single() + word_strings.noun_humans_plural() + word_strings.adjectives_hs() + word_strings.adverbs_hs() + word_strings.vt_hs() + word_strings.vi_hs() + word_strings.vd_hs()
+    str = sg.hs_grammar_false() 
+    + word_strings.pre_hs_false() 
+    + word_strings.determiners() 
+    + word_strings.noun_things_single() 
+    + word_strings.noun_things_plural() 
+    + word_strings.noun_humans_single() 
+    + word_strings.noun_humans_plural() 
+    + word_strings.adjectives_hs() 
+    + word_strings.adverbs_hs() 
+    + word_strings.vt_hs() 
+    + word_strings.vi_hs() 
+    + word_strings.vd_hs()
     return str
 
 def _setup_hs_grammar():
-    str = sg.hs_grammar() + word_strings.pre_hs() + word_strings.determiners() + word_strings.protected_groups_single() + word_strings.protected_groups_plural() + word_strings.noun_humans_single() + word_strings.adjectives_hs() + word_strings.adverbs_hs() + word_strings.vt_hs() + word_strings.vi_hs() + word_strings.vd_hs() + + word_strings.noun_things_single()
+    str = sg.hs_grammar() + word_strings.pre_hs() + word_strings.determiners() + word_strings.protected_groups_single() + word_strings.protected_groups_plural() + word_strings.adjectives_hs() + word_strings.adjectives_clean()+ word_strings.adverbs_hs() + word_strings.adverbs_clean() + word_strings.vt_hs_present() + word_strings.vt_hs_past()+ word_strings.vt_clean_present() + word_strings.vt_clean_past() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.noun_food_plural()+ word_strings.noun_food_singular()+ word_strings.noun_animals_singular() + word_strings.noun_animals_plural() + word_strings.noun_hate_speech_plural()+ word_strings.noun_hate_speech_single()
+
     return str
 
 
@@ -89,13 +112,13 @@ def _execute_clean(clean_grammar):
 
 
 def _execute_hs(hs_grammar):
-    hs_file = open("hs_true.csv", "a+")
-    hs_fw = csv.writer(hs_file)
-    hs_fw.writerow(['text', 'hate-speech'])
+    # hs_file = open("hs_true.csv", "a+")
+    # hs_fw = csv.writer(hs_file)
+    # hs_fw.writerow(['text', 'hate-speech'])
 
     grammar = CFG.fromstring(hs_grammar)
     for n, sent in enumerate(generate(grammar), 1):
-        hs_fw.writerow([" " .join(sent), "true"])
+        # hs_fw.writerow([" " .join(sent), "true"])
         print("%3d. %s" % (n, " ".join(sent)))
 
     hs_file.close()
@@ -233,10 +256,10 @@ if __name__ == "__main__":
     # hs_false_grammar = _setup_hs_false_grammar()
     # _execute_hs_false(hs_false_grammar)
     
-    # hs_grammar = _setup_hs_grammar()
-    # _execute_hs(hs_grammar)
+    hs_grammar = _setup_hs_grammar()
+    _execute_hs(hs_grammar)
 
-    _hs_testing()
+    # _hs_testing()
 
     
 

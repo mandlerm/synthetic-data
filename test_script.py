@@ -60,46 +60,86 @@ def _generate_one(grammar, item, depth):
 
 
 def _execute_hs(hs_grammar):
-    hs_file = open("hs_testing_short.csv", "a+")
-    hs_fw = csv.writer(hs_file)
-    hs_fw.writerow(['text', 'hate-speech'])
+    # hs_file = open("hs_test_pre_run.csv", "a+")
+    # hs_fw = csv.writer(hs_file)
+    # hs_fw.writerow(['text', 'hate-speech'])
 
     grammar = CFG.fromstring(hs_grammar)
     for n, sent in enumerate(generate(grammar), 1):
-        hs_fw.writerow([" " .join(sent), "true"])
+        # hs_fw.writerow([" " .join(sent), "true"])
         print("%3d. %s" % (n, " ".join(sent)))
+    # hs_file.close()
 
-    hs_file.close()
-
-
+# S -> Pre_hs NPh | NPh VPa_past_benign | Nh_clean HS_clause | Vt_hs_present PPp | Adj_hs PPp
 def hs_grammar():
     g = '''
-    S -> Pre NPh | NPh VPa | NPh VPb | NPh VPc
+    S -> Pre_hs NPh 
+    PgN ->  PPs | PPp 
+    Noun_clean -> Animals | Food | Humans
+    Animals -> N_animals_single | N_animals_plural
+    Food -> N_food_single | N_food_plural
+    Humans -> N_human_single | N_human_plural
 
-    NPh -> Adjhs PgN | Det Adjhs PgN | Advhs Adjhs PgN | Det Advhs PgN | Det Advhs Adjhs PgN  
+    NPh -> Adj_hs PgN | Det Adj_hs PgN | Adv_hs Adj_hs PgN | Det Adv_hs Adj_hs PgN 
+    VPa_past_benign -> Vt_clean_past Noun_clean Adv_clean | Vt_clean_past PgN | Vt_clean_past Noun_clean | Vt_clean_past Det Adj_hs Noun_clean
 
-    VPa -> Vt PgN | Vt Ns | Vt PgN Adjhs | Vt Ns Adjhs 
-    VPb -> Vi | Vi Advhs
-    VPc -> Vd Nhs Ns | Vd Nhs Ns Advhs
+    Nh_clean -> Det Humans Vt_clean_past  
+    HS_clause -> Det Adj_hs PgN | Det N_hate_speech_single | Det N_hate_speech_plural | Vt_hs_past PgN | Vt_hs_past Det Adj_hs PgN 
+    
+    Vt_hs_present -> 'burn'
+    
+    Vt_clean_past -> 'swept'
+    Det -> 'the'
+    Pre_hs -> 'you are'
+    Adj_hs -> 'dirty'
+    Adv_hs -> 'fucking'
+    Adj_clean -> 'lovely'
+    Adv_clean -> 'softly'
+    PPs -> 'Jew'
+    PPp -> 'Jews'
+    N_animals_single -> 'dog'
+    N_animals_plural -> 'dogs'
+    N_food_single -> 'pizza'
+    N_food_plural -> 'burgers'
+    N_human_single -> 'doctor'
+    N_human_plural -> 'nurses'
+    N_hate_speech_single -> 'lesbo'
+    N_hate_speech_plural -> 'faggots'
+
+    '''
+    return g
+
+def hs_false():
+    g = '''
+    S -> Pre NPh | NPh VPa_past | VPa_present Det Nhs | VPa_present Det Nthing
+
+    NPh -> Adjhs Nhs | Det Adjhs Nhs | Advhs Adjhs Nhs | Det Advhs Adjhs Nhs | Det Nhs 
+
+    VPa_past -> Vt Nhs | Vt Ns | Vt Det Adjhs Nhs
+    VPa_present -> 'gas' | 'cut'
+   
 
     Pre -> 'you are' | 'she is'
     Det -> 'a' | 'the'
     Adjhs -> 'dirty' | 'awful' | 'retarted'
     Advhs -> 'violently' | 'terribly' | 'miserably'
+    Adv -> 'calmly' | 'tonight'
 
     PgN -> 'Jew' | 'Christian'
-    Vt -> 'gassed' | 'choked'
+    Vths -> 'gassed' | 'choked'
+    Vt -> 'called' | 'drew'
     Ns -> 'kangaroo' | 'rice'
     Vi -> 'burnt' | 'fought' 
     Vd -> 'rid' | 'suspected'
     Nhs -> 'nurse' | 'sister' 
+    Nthing -> 'banana' | 'fort' 
     '''
     return g
 
-
+def clean():
+    pass
 
 if __name__ == "__main__":
     grammar = hs_grammar()
-    print(grammar)
-
     _execute_hs(grammar)
+    # print(grammar)
