@@ -207,7 +207,7 @@ def vt_hs_past():
 # Verb transitive: present: 
 # Vt_hs_present ->
 def vt_hs_present():
-    str = _read_file("Vt_hs_present.txt")
+    str = _read_file("vt_hs_present.txt")
     return f"Vt_hs_present -> {str}\n"
 
 # Verb intransitive: 

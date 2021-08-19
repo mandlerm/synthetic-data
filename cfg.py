@@ -7,137 +7,83 @@ import starter_grammars as sg
 from nltk.grammar import Nonterminal
 from nltk.grammar import CFG
 
-
-def _hs_testing():
-    #### hs_pre_nph
-    # str = sg.hs_pre_nph() + word_strings.pre_hs() + word_strings.determiners() + word_strings.protected_groups_single() + word_strings.protected_groups_plural() + word_strings.adjectives_hs() + word_strings.adverbs_hs() + word_strings.vt_hs() + word_strings.vi_hs() + word_strings.vd_hs()
-    # hs_file = open("hs_pre_nph3.csv", "a+")
-    # hs_fw = csv.writer(hs_file)
-    # hs_fw.writerow(['text', 'hate-speech'])
-
-    # grammar = CFG.fromstring(str)
-    # for n, sent in enumerate(generate(grammar), 1):
-    #     hs_fw.writerow([" " .join(sent), "true"])
-    #     print("%3d. %s" % (n, " ".join(sent)))
-
-    # hs_file.close()
-
-    ### hs_pnh_vpa
-    # str = sg.hs_pnh_vpa() + word_strings.pre_hs() + word_strings.determiners() + word_strings.protected_groups_single() + word_strings.protected_groups_plural() + word_strings.adjectives_hs() + word_strings.adverbs_hs() + word_strings.vt_hs() + word_strings.vi_hs() + word_strings.vd_hs()
-    # hs_file = open("hs_pnh_vpa5.csv", "a+")
-    # hs_fw = csv.writer(hs_file)
-    # hs_fw.writerow(['text', 'hate-speech'])
-
-    # grammar = CFG.fromstring(str)
-    # for n, sent in enumerate(generate(grammar), 1):
-    #     hs_fw.writerow([" " .join(sent), "true"])
-    #     print("%3d. %s" % (n, " ".join(sent)))
-
-    # hs_file.close()
-
-    # #### hs_nph_vpb
-    # str = sg.hs_nph_vpb() + word_strings.pre_hs() + word_strings.determiners() + word_strings.protected_groups_single() + word_strings.protected_groups_plural() + word_strings.adjectives_hs() + word_strings.adverbs_hs() + word_strings.vt_hs() + word_strings.vi_hs() + word_strings.vd_hs()
-    # hs_file = open("hs_nph_vpb3.csv", "a+")
-    # hs_fw = csv.writer(hs_file)
-    # hs_fw.writerow(['text', 'hate-speech'])
-
-    # grammar = CFG.fromstring(str)
-    # for n, sent in enumerate(generate(grammar), 1):
-    #     hs_fw.writerow([" " .join(sent), "true"])
-    #     print("%3d. %s" % (n, " ".join(sent)))
-
-    # hs_file.close()
-
-    ####  hs_nph_vpc
-    str = sg.hs_nph_vpc() + word_strings.pre_hs() + word_strings.determiners() + word_strings.protected_groups_single() + word_strings.protected_groups_plural() + word_strings.adjectives_hs() + word_strings.adverbs_hs() + word_strings.vt_hs() + word_strings.vi_hs() + word_strings.vd_hs() + word_strings.noun_humans_single() +  word_strings.noun_things_single()
-    hs_file = open("hs_nph_vpc5.csv", "a+")
-    hs_fw = csv.writer(hs_file)
-    hs_fw.writerow(['text', 'hate-speech'])
-
-    grammar = CFG.fromstring(str)
-    for n, sent in enumerate(generate(grammar), 1):
-        print("%3d. %s" % (n, " ".join(sent)))
-        hs_fw.writerow([" " .join(sent), "true"])
-
-    hs_file.close()
-
-
+######### Set up methods. Acquire the correct grammar
 def _setup_clean_grammar():
-    str = sg.clean_grammar() 
-    + word_strings.pre_clean() 
-    + word_strings.determiners() 
-    + word_strings.noun_things_single() 
-    + word_strings.noun_things_plural() 
-    + word_strings.noun_humans_single() 
-    + word_strings.noun_humans_plural() 
-    + word_strings.adjectives_clean() 
-    + word_strings.adverbs_clean() 
-    + word_strings.vt_clean() 
-    + word_strings.vi_clean() 
-    + word_strings.vd_clean()
+    str = sg.clean_grammar() + word_strings.pre_clean() + word_strings.determiners() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.noun_food_singular() + word_strings.noun_food_plural() + word_strings.noun_animals_singular() + word_strings.noun_animals_plural() + word_strings.adjectives_clean() + word_strings.adverbs_clean() + word_strings.vt_clean_past() + word_strings.vt_clean_present()
+  
     return str
 
-def _setup_hs_false_grammar():
-    str = sg.hs_grammar_false() 
-    + word_strings.pre_hs_false() 
-    + word_strings.determiners() 
-    + word_strings.noun_things_single() 
-    + word_strings.noun_things_plural() 
-    + word_strings.noun_humans_single() 
-    + word_strings.noun_humans_plural() 
-    + word_strings.adjectives_hs() 
-    + word_strings.adverbs_hs() 
-    + word_strings.vt_hs() 
-    + word_strings.vi_hs() 
-    + word_strings.vd_hs()
+def _setup_hs_grammar_false_pg():
+    str = sg.hs_grammar_false_pg() + word_strings.pre_hs_false() + word_strings.determiners() + word_strings.noun_things_single() + word_strings.noun_things_plural() + word_strings.noun_food_plural() + word_strings.noun_food_singular() + word_strings.noun_animals_plural() + word_strings.noun_animals_singular() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.adjectives_clean() + word_strings.adverbs_clean() + word_strings.vt_clean_past() + word_strings.vt_clean_present() + word_strings.protected_groups_plural() + word_strings.protected_groups_single()
+   
+    return str
+
+def _setup_hs_grammar_false_non_pg():
+    str = sg.hs_grammar_false_non_pg() + word_strings.pre_hs_false() + word_strings.determiners() + word_strings.noun_food_plural() + word_strings.noun_food_singular() + word_strings.noun_animals_plural() + word_strings.noun_animals_singular() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.adjectives_clean() + word_strings.adverbs_clean() + word_strings.vt_clean_past() + word_strings.vt_clean_present() + word_strings.adjectives_hs() + word_strings.adverbs_hs() + word_strings.vt_hs_present() + word_strings.vt_hs_past() 
+   
     return str
 
 def _setup_hs_grammar():
-    str = sg.hs_grammar() + word_strings.pre_hs() + word_strings.determiners() + word_strings.protected_groups_single() + word_strings.protected_groups_plural() + word_strings.adjectives_hs() + word_strings.adjectives_clean()+ word_strings.adverbs_hs() + word_strings.adverbs_clean() + word_strings.vt_hs_present() + word_strings.vt_hs_past()+ word_strings.vt_clean_present() + word_strings.vt_clean_past() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.noun_food_plural()+ word_strings.noun_food_singular()+ word_strings.noun_animals_singular() + word_strings.noun_animals_plural() + word_strings.noun_hate_speech_plural()+ word_strings.noun_hate_speech_single()
+    str = sg.hs_grammar() + word_strings.pre_hs() + word_strings.determiners() + word_strings.protected_groups_single() + word_strings.protected_groups_plural() + word_strings.adjectives_hs() + word_strings.adjectives_clean() + word_strings.adverbs_hs() + word_strings.adverbs_clean() + word_strings.vt_hs_present() + word_strings.vt_hs_past() + word_strings.vt_clean_present() + word_strings.vt_clean_past() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.noun_food_plural() + word_strings.noun_food_singular() + word_strings.noun_animals_singular() + word_strings.noun_animals_plural() + word_strings.noun_hate_speech_plural() + word_strings.noun_hate_speech_single() 
 
     return str
 
 
-def _execute_clean(clean_grammar):
-    clean_file = open("hs_clean.csv", "a+")
-    clean_fw = csv.writer(clean_file)
-    clean_fw.writerow(['text', 'hate-speech'])
+########### Execute methods. Run the grammar script and output to csv
+def _execute_hs_true(clean_grammar, filename):
+    f = open(filename, "a+")
+    fw = csv.writer(f)
+    fw.writerow(['row', 'text', 'hate-speech'])
 
     grammar = CFG.fromstring(clean_grammar)
     for n, sent in enumerate(generate(grammar), 1):
-        clean_fw.writerow([" " .join(sent), "false"])
+        fw.writerow([n, " " .join(sent), 1])
         print("%3d. %s" % (n, " ".join(sent)))
   
-    clean_file.close()
+    f.close()
 
+def _execute_hs_false(grammar, filename):
+    
+    f = open(filename, "a+")
+    fw = csv.writer(f)
+    fw.writerow(['row', 'text', 'hate-speech'])
+    grammar = CFG.fromstring(grammar)
 
-def _execute_hs(hs_grammar):
-    # hs_file = open("hs_true.csv", "a+")
-    # hs_fw = csv.writer(hs_file)
-    # hs_fw.writerow(['text', 'hate-speech'])
-
-    grammar = CFG.fromstring(hs_grammar)
     for n, sent in enumerate(generate(grammar), 1):
-        # hs_fw.writerow([" " .join(sent), "true"])
+        fw.writerow([n, " " .join(sent), 0])
+        print("%3d. %s" % (n, " ".join(sent)))
+  
+    f.close()
+
+
+def _execute_hs_false_pg(hs_false_grammar):
+    hs_false_file = open("hs_false_pg.csv", "a+")
+    hs_false_fw = csv.writer(hs_false_file)
+    hs_false_fw.writerow(['row', 'text', 'hate-speech'])
+    grammar = CFG.fromstring(hs_false_grammar)
+  
+    for n, sent in enumerate(generate(grammar), 1):
+        hs_false_fw.writerow([n," " .join(sent), "false"])
         print("%3d. %s" % (n, " ".join(sent)))
 
-    hs_file.close()
+    hs_false_file.close()
 
-
-def _execute_hs_false(hs_false_grammar):
-    hs_false_file = open("hs_false.csv", "a+")
+def _execute_hs_false_non_pg(hs_false_grammar):
+    hs_false_file = open("hs_false_non_pg.csv", "a+")
     hs_false_fw = csv.writer(hs_false_file)
-    hs_false_fw.writerow(['text', 'hate-speech'])
+    hs_false_fw.writerow(['row', 'text', 'hate-speech'])
 
     grammar = CFG.fromstring(hs_false_grammar)
     for n, sent in enumerate(generate(grammar), 1):
-        hs_false_fw.writerow([" " .join(sent), "false"])
+        hs_false_fw.writerow([n," " .join(sent), "false"])
         print("%3d. %s" % (n, " ".join(sent)))
 
     hs_false_file.close()
 
 
 
+
+###########  Grammar generation methods
 def generate(grammar, start=None, depth=None, n=None):
     """
     Generates an iterator of all sentences from a CFG.
@@ -189,78 +135,18 @@ def _generate_one(grammar, item, depth):
             yield [item]
 
 
-def demo(N=10):
-    pass
-    # f1 = "clean_text.csv"
-    # clean_file = open(f1, "a+")
-    # clean_fw = csv.writer(clean_file)
-    # clean_fw.writerow(['text', 'hate-speech'] )
-    
-
-    ##############  HS  ###############
-    # f2 = "hs_trues.csv"
-    # hs_file = open(f2, "a+")
-    # hs_fw = csv.writer(hs_file)
-    # hs_fw.writerow(['text', 'hate-speech'] )
-    # hs_count = 0
-
-    # grammar = CFG.fromstring(hs_grammar)
-    # for n, sent in enumerate(generate(grammar, n=N), 1):  # optional second argument to limit number of outputs
-    # for n, sent in enumerate(generate(grammar), 1):
-        # hs_fw.writerow([" " .join(sent), "true"])
-        # hs_count += 1
-        # print("%3d. %s" % (n, " ".join(sent)))
-
-
-
-    ##############  FAKE-HS  ###############
-    # f2 = "hs_falses.csv"
-    # hs_falses_file = open(f2, "a+")
-    # falses_fw = csv.writer(hs_falses_file)
-    # falses_fw.writerow(['text', 'hate-speech'] )
-    # hs_false_count = 0
-
-    # grammar = CFG.fromstring(hs_grammar_falses)
-    # print(grammar)
-    # # for n, sent in enumerate(generate(grammar, n=N), 1):  # optional second argument to limit number of outputs
-    # for n, sent in enumerate(generate(grammar), 1):
-    #     falses_fw.writerow([" " .join(sent), "false"])
-    #     hs_false_count += 1
-        # print("%3d. %s" % (n, " ".join(sent)))
-
-
-    # ##############  CLEAN  ###############
-    # f2 = "clean_text.csv"
-    # clean_file = open(f2, "a+")
-    # clean_fw = csv.writer(clean_file)
-    # clean_fw.writerow(['text', 'hate-speech'] )
-    # clean_count = 0
-
-    # grammar = CFG.fromstring(clean_grammar)
-    # # for n, sent in enumerate(generate(grammar, n=N), 1):  # optional second argument to limit number of outputs
-    # for n, sent in enumerate(generate(grammar), 1):
-    #     clean_fw.writerow([" " .join(sent), "false"])
-    #     clean_count += 1
-    #     print("%3d. %s" % (n, " ".join(sent)))
-
-
-    # print(f"HS: {hs_count}, CLEAN: {clean_count}, False signal: {hs_false_count}")
-
-    # print(f"HS: {hs_count}")
-
-
 if __name__ == "__main__":
+    # hs_grammar = _setup_hs_grammar()
+    # _execute_hs_true(hs_grammar, "hs_true_r3.csv")
+    
     # clean_grammar = _setup_clean_grammar()
-    # _execute_clean(clean_grammar)
+    # _execute_hs_false(clean_grammar,"hs_clean_r3.csv")
 
-    # hs_false_grammar = _setup_hs_false_grammar()
-    # _execute_hs_false(hs_false_grammar)
+    # hs_grammar2 = _setup_hs_grammar_false_non_pg()
+    # _execute_hs_false(hs_grammar2, "hs_false_non_pg_r3.csv")
     
-    hs_grammar = _setup_hs_grammar()
-    _execute_hs(hs_grammar)
+    hs_grammar1 = _setup_hs_grammar_false_pg()
+    _execute_hs_false(hs_grammar1,"hs_false_pg_r3.csv")
+  
 
-    # _hs_testing()
 
-    
-
-    

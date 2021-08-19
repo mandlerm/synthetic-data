@@ -58,7 +58,6 @@ def _generate_one(grammar, item, depth):
             yield [item]
 
 
-
 def _execute_hs(hs_grammar):
     # hs_file = open("hs_test_pre_run.csv", "a+")
     # hs_fw = csv.writer(hs_file)
@@ -69,6 +68,40 @@ def _execute_hs(hs_grammar):
         # hs_fw.writerow([" " .join(sent), "true"])
         print("%3d. %s" % (n, " ".join(sent)))
     # hs_file.close()
+
+def _execute_clean(grammar):
+    # hs_file = open("hs_test_pre_run.csv", "a+")
+    # hs_fw = csv.writer(hs_file)
+    # hs_fw.writerow(['text', 'hate-speech'])
+
+    grammar = CFG.fromstring(grammar)
+    for n, sent in enumerate(generate(grammar), 1):
+        # hs_fw.writerow([" " .join(sent), "true"])
+        print("%3d. %s" % (n, " ".join(sent)))
+    # hs_file.close()
+
+def _execute_false_pg(grammar):
+    # hs_file = open("hs_test_pre_run_false_pg.csv", "a+")
+    # hs_fw = csv.writer(hs_file)
+    # hs_fw.writerow(['text', 'hate-speech'])
+
+    grammar = CFG.fromstring(grammar)
+    for n, sent in enumerate(generate(grammar), 1):
+        # hs_fw.writerow([" " .join(sent), "true"])
+        print("%3d. %s" % (n, " ".join(sent)))
+    # hs_file.close()
+
+def _execute_false_non_pg(grammar):
+    # hs_file = open("hs_test_pre_run_false_non_pg.csv", "a+")
+    # hs_fw = csv.writer(hs_file)
+    # hs_fw.writerow(['text', 'hate-speech'])
+
+    grammar = CFG.fromstring(grammar)
+    for n, sent in enumerate(generate(grammar), 1):
+        # hs_fw.writerow([" " .join(sent), "true"])
+        print("%3d. %s" % (n, " ".join(sent)))
+    # hs_file.close()
+
 
 # S -> Pre_hs NPh | NPh VPa_past_benign | Nh_clean HS_clause | Vt_hs_present PPp | Adj_hs PPp
 def hs_grammar():
@@ -87,7 +120,6 @@ def hs_grammar():
     HS_clause -> Det Adj_hs PgN | Det N_hate_speech_single | Det N_hate_speech_plural | Vt_hs_past PgN | Vt_hs_past Det Adj_hs PgN 
     
     Vt_hs_present -> 'burn'
-    
     Vt_clean_past -> 'swept'
     Det -> 'the'
     Pre_hs -> 'you are'
@@ -109,37 +141,82 @@ def hs_grammar():
     '''
     return g
 
-def hs_false():
+def hs_grammar_false_pg():
     g = '''
-    S -> Pre NPh | NPh VPa_past | VPa_present Det Nhs | VPa_present Det Nthing
-
-    NPh -> Adjhs Nhs | Det Adjhs Nhs | Advhs Adjhs Nhs | Det Advhs Adjhs Nhs | Det Nhs 
-
-    VPa_past -> Vt Nhs | Vt Ns | Vt Det Adjhs Nhs
-    VPa_present -> 'gas' | 'cut'
-   
-
-    Pre -> 'you are' | 'she is'
-    Det -> 'a' | 'the'
-    Adjhs -> 'dirty' | 'awful' | 'retarted'
-    Advhs -> 'violently' | 'terribly' | 'miserably'
-    Adv -> 'calmly' | 'tonight'
-
-    PgN -> 'Jew' | 'Christian'
-    Vths -> 'gassed' | 'choked'
-    Vt -> 'called' | 'drew'
-    Ns -> 'kangaroo' | 'rice'
-    Vi -> 'burnt' | 'fought' 
-    Vd -> 'rid' | 'suspected'
-    Nhs -> 'nurse' | 'sister' 
-    Nthing -> 'banana' | 'fort' 
+    Pre_hs_false -> 'you are'
+    Det -> 'a'
+    Adj_clean -> 'brisk'
+    Adv_clean -> 'sweetly'
+    Vt_clean_past -> 'threw'
+    Vt_clean_present -> 'help'
+    N_human_single -> 'mom'
+    N_human_plural -> 'doctors'
+    N_food_single -> 'banana' | 'pizza'
+    N_food_plural -> 'cakes'
+    N_animal_single -> 'kangaroo'
+    N_animal_plural -> 'bears'
+    Animals -> N_animal_single | N_animal_plural
+    PPs -> 'Jew'
+    PPp -> 'Jews'
     '''
-    return g
+    return sg.hs_grammar_false_pg() + g
+
+
+def hs_grammar_false_non_pg():
+    g = '''
+    Pre_hs_false -> 'you are'
+    Det -> 'a'
+    Adj_clean -> 'brisk'
+    Adv_clean -> 'sweetly'
+    Vt_clean_past -> 'threw'
+    Vt_clean_present -> 'help'
+    Adj_hs -> 'dirty'
+    Adv_hs -> 'fucking'
+    Vt_hs_past -> 'gassed'
+    Vt_hs_present -> 'burn'
+    N_human_single -> 'mom'
+    N_human_plural -> 'doctors'
+    N_food_single -> 'banana' | 'pizza'
+    N_food_plural -> 'cakes'
+    N_animals_single -> 'kangaroo'
+    N_animal_plural -> 'bears'
+    Animals -> N_animal_single | N_animal_plural
+
+    '''
+    return sg.hs_grammar_false_non_pg() + g
+
+
+
 
 def clean():
-    pass
+    str =  '''
+    Pre_clean -> 'you are'
+    Det -> 'a'
+    Adj_clean -> 'aboard'
+    Adv_clean -> 'sweetly'
+    Vt_clean_past -> 'threw'
+    Vt_clean_present -> 'help'
+    N_human_single -> 'mom'
+    N_human_plural -> 'doctors'
+    N_food_single -> 'banana' | 'pizza'
+    N_food_plural -> 'cakes'
+    N_animal_single -> 'kangaroo'
+    N_animal_plural -> 'bears'
+    Animals -> N_animal_single | N_animal_plural
+    
+    '''
+    return sg.clean_grammar() + str
 
 if __name__ == "__main__":
-    grammar = hs_grammar()
-    _execute_hs(grammar)
+    # grammar = hs_grammar()
+    # _execute_hs(grammar)
+    # grammar = clean()
+    # _execute_clean(grammar)
+    # grammar = hs_grammar_false_pg()
+    # print(grammar)
+    # _execute_false_non_pg(grammar)
+
+    grammar = hs_grammar_false_non_pg()
+    print(grammar)
+    _execute_false_non_pg(grammar)
     # print(grammar)

@@ -1,7 +1,6 @@
-
 def clean_grammar():
     g = '''
-    S -> Det N_human_single Vt_clean_past Det N_animals_single
+    S -> Pre_clean Det N_human_single | Pre_clean Det N_animal_single  | Pre_clean Det N_food_single | Det N_human_single Vt_clean_past Det N_animal_single | N_human_plural Vt_clean_past Animals | Det N_human_single Vt_clean_past Det N_food_single |  N_human_plural Vt_clean_past N_food_plural | Det N_animal_single Vt_clean_past Det N_human_single 
     
     PgN ->  PPs | PPp 
     Noun_clean -> Animals | Food | Humans
@@ -16,7 +15,7 @@ def clean_grammar():
 # Protected groups with benign adverbs, adjectives and nouns
 def hs_grammar_false_pg():
     g = '''
-    S -> PPp Vt_clean_past Det Noun_single
+    S -> Pre_hs_false Det PPs | Det NPh_single VPa_past_benign |  NPh_plural VPa_past_benign | Vt_clean_present PPp | Adj_clean PPp
 
     PgN ->  PPs | PPp 
     Noun_clean -> Animals | Food | Humans
@@ -36,15 +35,14 @@ def hs_grammar_false_pg():
 # Regular nouns with hate-speech/violent/aggressive adverbs, adjectives and nouns
 def hs_grammar_false_non_pg():
     g = '''
-    S -> Det Adj_hs N_food_single | Det Adj_hs N_animals_single | Det Adj_hs N_human_single | Vt_hs_past Det N_animal_single | Vt_hs_past N_animal_plural | Vt_hs_past Det N_human_single | Vt_hs_past  N_human_plural | Vt_hs_past Det 'fucking' N_animal_single | Vt_hs_past 'the fucking'  N_animal_plural | Vt_hs_past Det 'fucking'  N_human_single | Vt_hs_past  'the fucking' N_human_plural
+    S -> Pre_hs_false Det Noun_single | Det NPh_single VPa_past_benign |  NPh_plural VPa_past_benign 
 
-    PgN ->  PPs | PPp 
     Noun_clean -> Animals | Food | Humans
     Animals -> N_animals_single | N_animals_plural
     Food -> N_food_single | N_food_plural
     Humans -> N_human_single | N_human_plural
-    Noun_single -> PPs | N_animals_single | N_food_single | N_human_single
-    Noun_plural -> PPp | N_animals_plural | N_food_plural | N_human_plural
+    Noun_single -> N_animals_single | N_food_single | N_human_single
+    Noun_plural -> N_animals_plural | N_food_plural | N_human_plural
 
     NPh_single -> Adj_hs Noun_single | Adv_hs Adj_hs Noun_single 
     NPh_plural -> Adj_hs Noun_plural | Adv_hs Adj_hs Noun_plural 
@@ -53,12 +51,11 @@ def hs_grammar_false_non_pg():
     return g
 
 
-
 # TRUE FOR HS
 # Adjhs PgN | Det Adjhs PgN | Advhs Adjhs PgN | Det Advhs PgN | Det Advhs Adjhs PgN  
 def hs_grammar():
     g = '''
-    S -> Vt_hs_present PPp | Vt_hs_present Det PPs | Vt_hs_present Det N_hate_speech_single | Vt_hs_present N_hate_speech_plural | Adj_hs PPp
+    S -> Pre_hs Det HS_clause_simple | Det NPh VPa_past_benign | Nh_clean HS_complex_clause | Vt_hs_present PPp | Adj_hs PPp
 
     PgN ->  PPs | PPp 
     Noun_clean -> Animals | Food | Humans
@@ -66,17 +63,20 @@ def hs_grammar():
     Food -> N_food_single | N_food_plural
     Humans -> N_human_single | N_human_plural
 
+    NPh -> Adj_hs PgN | Adv_hs Adj_hs PgN | Adj_hs N_hate_speech_single
     VPa_past_benign ->  Vt_clean_past PgN | Vt_clean_past Noun_clean | Vt_clean_past Det Adj_hs Noun_clean
 
-    Nh_clean -> Det Humans Vt_clean_past 
-
-    HS_clause_simple -> N_hate_speech_single | Adj_hs N_hate_speech_single | Adj_hs PgN
+    Nh_clean -> Det Humans Vt_clean_past  
+    HS_clause_simple -> N_hate_speech_single | Adj_hs PgN
 
     HS_clause_complex -> Vt_hs_past Det PgN | Vt_hs_past Det Adj_hs PPs | Adv_hs Adj_hs PgN
-    
     '''
 
     return g
+
+
+
+
 
 
 
@@ -133,11 +133,3 @@ def hs_nph_vpc():
     VPc -> Vd Nhs Ns | Vd Nhs Ns Advhs
     '''
     return g
-
-
-
-
-
-
-
-
