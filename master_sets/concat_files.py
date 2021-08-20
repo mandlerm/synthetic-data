@@ -10,6 +10,7 @@ num_files = len(sys.argv)
 
 f = open(out_file, 'a+')
 fw = csv.writer(f)
+print("**************")
 print(out_file)
 print(num_files)
 # fw.writerow(['row', 'text', 'hate-speech'])
