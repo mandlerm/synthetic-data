@@ -1,3 +1,8 @@
+"""
+run script with filename as arg
+"""
+
+
 import csv
 import sys 
 import math
@@ -48,5 +53,6 @@ with open(filename) as f:
                     train_count += 1
                     train_writer.writerow(row)
 
+f.close()
 
 print(f"total: {row_count}: test: {test_count} train {train_count}")

@@ -26,15 +26,25 @@ def pre_clean():
     str = _read_file("pre_clean.txt")
     return f"Pre_clean -> {str}\n"
 
-# Pre_hs ->
-def pre_hs():
-    str = _read_file("pre_hs.txt")
-    return f"Pre_hs -> {str}\n"
+# Pre_hs_single ->
+def pre_hs_single():
+    str = _read_file("pre_hs_s.txt")
+    return f"Pre_hs_s -> {str}\n"
 
-# Pre_hs_false ->
-def pre_hs_false():
-    str = _read_file("pre_hs_false.txt")
-    return f"Pre_hs_false -> {str}\n"
+# Pre_hs_plural ->
+def pre_hs_plural():
+    str = _read_file("pre_hs_p.txt")
+    return f"Pre_hs_p -> {str}\n"
+
+# Pre_hs_false_s ->
+def pre_hs_false_single():
+    str = _read_file("pre_hs_false_s.txt")
+    return f"Pre_hs_false_s -> {str}\n"
+
+# Pre_hs_false_p ->
+def pre_hs_false_plural():
+    str = _read_file("pre_hs_false_p.txt")
+    return f"Pre_hs_false_p -> {str}\n"
 
 # Det ->
 def determiners():
@@ -223,3 +233,32 @@ def vd_hs():
     return f"Vd -> {str}\n"
 
 
+###################################
+# Zero Tolerance Lists
+# hate speech even as a standalone 
+
+###################################
+
+# Zero Tolerance phrase
+# ZTp ->
+def zt_phrase():
+    str = _read_file("zt_phrase.txt")
+    return f"ZTp -> {str}\n"
+
+# Zero Tolerance Noun Single
+# ZT_n_s 
+def zt_noun_single():
+    str = _read_file("zt_noun_single.txt")
+    return f"ZT_n_s -> {str}\n"
+
+# Zero Tolerance Noun Plural
+# ZT_n_p
+def zt_noun_plural():
+    str = _read_file("zt_noun_plural.txt")
+    return f"ZT_n_p -> {str}\n"
+
+# Zero Adj
+# ZT_adj
+def zt_adj():
+    str = _read_file("zt_adj.txt")
+    return f"ZT_adj -> {str}\n"

@@ -6,7 +6,7 @@ import csv
 import sys 
 import math
 
-NUM_ROWS_NEEDED = 47935
+NUM_ROWS_NEEDED = 138297
 
 # input file
 filename = sys.argv[1]
@@ -27,13 +27,13 @@ pool_writer = csv.writer(pool_file)
 # Currently hard coded based on how many
 # rows are needed from the file
 ##################################
-row_count = math.floor(len(list(r)))
+row_count = round(len(list(r)))
 
-increment = math.floor(row_count / NUM_ROWS_NEEDED)
+increment = round(row_count / NUM_ROWS_NEEDED)
 count = 0
 current_count = 0
 pool_count = 0
-print(increment)
+print("increment value", increment)
 
 with open(filename) as f:
             csvreader = csv.reader(f)
@@ -50,6 +50,6 @@ with open(filename) as f:
                     pool_count += 1
                     pool_writer.writerow(row)
                     
-
+f.close()
 
 print(f"{row_count}: pool: {pool_count} current {current_count}")

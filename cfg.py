@@ -14,17 +14,22 @@ def _setup_clean_grammar():
     return str
 
 def _setup_hs_grammar_false_pg():
-    str = sg.hs_grammar_false_pg() + word_strings.pre_hs_false() + word_strings.determiners() + word_strings.noun_things_single() + word_strings.noun_things_plural() + word_strings.noun_food_plural() + word_strings.noun_food_singular() + word_strings.noun_animals_plural() + word_strings.noun_animals_singular() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.adjectives_clean() + word_strings.adverbs_clean() + word_strings.vt_clean_past() + word_strings.vt_clean_present() + word_strings.protected_groups_plural() + word_strings.protected_groups_single()
+    str = sg.hs_grammar_false_pg() + word_strings.pre_hs_false_single() + word_strings.pre_hs_false_plural() + word_strings.determiners() + word_strings.noun_things_single() + word_strings.noun_things_plural() + word_strings.noun_food_plural() + word_strings.noun_food_singular() + word_strings.noun_animals_plural() + word_strings.noun_animals_singular() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.adjectives_clean() + word_strings.adverbs_clean() + word_strings.vt_clean_past() + word_strings.vt_clean_present() + word_strings.protected_groups_plural() + word_strings.protected_groups_single()
    
     return str
 
 def _setup_hs_grammar_false_non_pg():
-    str = sg.hs_grammar_false_non_pg() + word_strings.pre_hs_false() + word_strings.determiners() + word_strings.noun_food_plural() + word_strings.noun_food_singular() + word_strings.noun_animals_plural() + word_strings.noun_animals_singular() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.adjectives_clean() + word_strings.adverbs_clean() + word_strings.vt_clean_past() + word_strings.vt_clean_present() + word_strings.adjectives_hs() + word_strings.adverbs_hs() + word_strings.vt_hs_present() + word_strings.vt_hs_past() 
+    str = sg.hs_grammar_false_non_pg() + word_strings.pre_hs_false_single() + word_strings.pre_hs_false_plural() + word_strings.determiners() + word_strings.noun_food_plural() + word_strings.noun_food_singular() + word_strings.noun_animals_plural() + word_strings.noun_animals_singular() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.adjectives_clean() + word_strings.adverbs_clean() + word_strings.vt_clean_past() + word_strings.vt_clean_present() + word_strings.adjectives_hs() + word_strings.adverbs_hs() + word_strings.vt_hs_present() + word_strings.vt_hs_past() 
    
     return str
 
 def _setup_hs_grammar():
-    str = sg.hs_grammar() + word_strings.pre_hs() + word_strings.determiners() + word_strings.protected_groups_single() + word_strings.protected_groups_plural() + word_strings.adjectives_hs() + word_strings.adjectives_clean() + word_strings.adverbs_hs() + word_strings.adverbs_clean() + word_strings.vt_hs_present() + word_strings.vt_hs_past() + word_strings.vt_clean_present() + word_strings.vt_clean_past() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.noun_food_plural() + word_strings.noun_food_singular() + word_strings.noun_animals_singular() + word_strings.noun_animals_plural() + word_strings.noun_hate_speech_plural() + word_strings.noun_hate_speech_single() 
+    str = sg.hs_grammar() + word_strings.pre_hs_single() + word_strings.pre_hs_plural() + word_strings.determiners() + word_strings.zt_noun_plural() + word_strings.zt_noun_single() + word_strings.zt_phrase() + word_strings.zt_adj() + word_strings.protected_groups_single() + word_strings.protected_groups_plural() + word_strings.adjectives_hs() + word_strings.adjectives_clean() + word_strings.adverbs_hs() + word_strings.adverbs_clean() + word_strings.vt_hs_present() + word_strings.vt_hs_past() + word_strings.vt_clean_present() + word_strings.vt_clean_past() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.noun_food_plural() + word_strings.noun_food_singular() + word_strings.noun_animals_singular() + word_strings.noun_animals_plural() + word_strings.noun_hate_speech_plural() + word_strings.noun_hate_speech_single() 
+
+    return str
+
+def _setup_surgical_hs():
+    str = sg.surgical_hs_grammar() + word_strings.pre_hs_single() + word_strings.pre_hs_plural() + word_strings.determiners() + word_strings.zt_noun_plural() + word_strings.zt_noun_single() + word_strings.zt_phrase() + word_strings.zt_adj() + word_strings.protected_groups_single() + word_strings.protected_groups_plural() + word_strings.adjectives_hs() + word_strings.adjectives_clean() + word_strings.adverbs_hs() + word_strings.adverbs_clean() + word_strings.vt_hs_present() + word_strings.vt_hs_past() + word_strings.vt_clean_present() + word_strings.vt_clean_past() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.noun_food_plural() + word_strings.noun_food_singular() + word_strings.noun_animals_singular() + word_strings.noun_animals_plural() + word_strings.noun_hate_speech_plural() + word_strings.noun_hate_speech_single() 
 
     return str
 
@@ -145,8 +150,11 @@ if __name__ == "__main__":
     # hs_grammar2 = _setup_hs_grammar_false_non_pg()
     # _execute_hs_false(hs_grammar2, "hs_false_non_pg_r3.csv")
     
-    hs_grammar1 = _setup_hs_grammar_false_pg()
-    _execute_hs_false(hs_grammar1,"hs_false_pg_r3.csv")
+    # hs_grammar1 = _setup_hs_grammar_false_pg()
+    # _execute_hs_false(hs_grammar1,"hs_false_pg_r3.csv")
+
+    surgical_hs = _setup_surgical_hs()
+    _execute_surgical_false(surgical_hs,"v2_a.csv")
   
 
 
