@@ -79,6 +79,78 @@ def hs_grammar():
     return g
 
 
+# TRUE FOR HS:  Version2.1
+# Adjhs PgN | Det Adjhs PgN | Advhs Adjhs PgN | Det Advhs PgN | Det Advhs Adjhs PgN  
+def surgical_hs_grammar():
+    v2a = '''
+    S -> Pro 'fucking' PgN
+
+    Pro -> 'ur' | 'ure' | 'youre' |  'you are' | 'u r '| 'u are' | 'you r' | 'she' | 'they' | 'he' | 'them' 
+    PgN ->  PPs | PPp 
+    '''
+
+    v2b = '''
+    S -> Pro 'retarted' | Pro 'retard' | Pro 'retards' | Pro 'fucking retarted' | Pro 'fucking retard' | Pro 'fucking retards'
+
+    Pro -> 'ur' | 'ure' | 'youre' |  'you are' | 'u r '| 'u are' | 'you r' | 'she' | 'they' | 'he' | 'them' 
+    '''
+
+    v2c = '''
+    S -> Noun_single 'is retarded' | Noun_plural 'are retarted' | Noun_plural 'r retarted' | Noun_single 'is fucking retarded' | Noun_plural 'are fucking retarted' | Noun_plural 'r fucking retarted'
+
+    Noun_single -> PPs | N_animals_single | N_food_single | N_human_single
+    Noun_plural -> PPp | N_animals_plural | N_food_plural | N_human_plural
+
+    Pro -> 'ur' | 'ure' | 'youre' |  'you are' | 'u r'| 'u are' | 'you r' | 'she' | 'they' | 'he' | 'them' 
+    '''
+
+    v2d = '''
+    S -> 'retarted' Noun_clean
+    
+    Noun_clean -> Animals | Food | Humans
+    Animals -> N_animals_single | N_animals_plural
+    Food -> N_food_single | N_food_plural
+    Humans -> N_human_single | N_human_plural
+
+    Noun_single -> PPs | N_animals_single | N_food_single | N_human_single
+    Noun_plural -> PPp | N_animals_plural | N_food_plural | N_human_plural
+
+    Pro -> 'ur' | 'ure' | 'youre' |  'you are' | 'u r'| 'u are' | 'you r' | 'she' | 'they' | 'he' | 'them' 
+    '''
+
+    v2e = '''
+    S -> Ad_jhs PPp | Adj_hs Det PPs 
+    '''
+
+    v2f = '''
+    S -> Adv_hs Adj_hs PPp | Adv_hs Adj_hs Det PPs 
+    '''
+
+    v2g = '''
+    S -> PPs HSAnS | PPs HSAnsP
+
+    HSAnS -> 'pig' | 'ape' | 'monkey' | 'rat'
+    HSAnP -> 'pigs' | 'apes' | 'monkeys' | 'rats'
+    '''
+
+    v2h = '''
+    S -> Pro Ugly PPp
+
+    Pro -> 'I' | 'we' 
+
+    Ugly -> | 'hate' | 'sterilize' | 'slaughter' | 'shoot' | 'kill' | 'gas' | 'hang' | 'arrest' | 'ban' | 'beat' | 'slay' | 'oppress' | 'ensalve' | 'loath' | 'despise' | 'abhor' | 'detest'
+    '''
+
+    return v2c
 
 
 
+
+
+'''
+fuck
+fck
+fucking
+fcking
+ 
+'''

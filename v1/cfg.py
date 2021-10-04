@@ -34,16 +34,22 @@ def _setup_surgical_hs():
     return str
 
 
+def _setup_version_v2_3():
+    str = sg.surgical_hs_grammar() + word_strings.pre_hs_single() + word_strings.pre_hs_plural() + word_strings.determiners() + word_strings.zt_noun_plural() + word_strings.zt_noun_single() + word_strings.zt_phrase() + word_strings.zt_adj() + word_strings.protected_groups_single() + word_strings.protected_groups_plural() + word_strings.adjectives_hs() + word_strings.adjectives_clean() + word_strings.adverbs_hs() + word_strings.adverbs_clean() + word_strings.vt_hs_present() + word_strings.vt_hs_past() + word_strings.vt_clean_present() + word_strings.vt_clean_past() + word_strings.noun_human_single() + word_strings.noun_human_plural() + word_strings.noun_food_plural() + word_strings.noun_food_singular() + word_strings.noun_animals_singular() + word_strings.noun_animals_plural() + word_strings.noun_hate_speech_plural() + word_strings.noun_hate_speech_single() 
+
+    return str
+
+
 ########### Execute methods. Run the grammar script and output to csv
 def _execute_hs_true(clean_grammar, filename):
     f = open(filename, "a+")
     fw = csv.writer(f)
-    fw.writerow(['row', 'text', 'hate-speech'])
+    fw.writerow(['lang', 'text', 'hatespeech'])
 
     grammar = CFG.fromstring(clean_grammar)
     for n, sent in enumerate(generate(grammar), 1):
-        fw.writerow([n, " " .join(sent), 1])
-        print("%3d. %s" % (n, " ".join(sent)))
+        fw.writerow(['eng', " " .join(sent), 1])
+        print(f"eng, {' '.join(sent)}, 1 ")
   
     f.close()
 
@@ -154,7 +160,32 @@ if __name__ == "__main__":
     # _execute_hs_false(hs_grammar1,"hs_false_pg_r3.csv")
 
     surgical_hs = _setup_surgical_hs()
-    _execute_surgical_false(surgical_hs,"v2_a.csv")
+    # _execute_hs_true(surgical_hs,"./v2/v2_a.csv")
+    # _execute_hs_true(surgical_hs,"./v2/v2_b.csv")
+    _execute_hs_true(surgical_hs,"./v2/v2_c.csv")
+    # _execute_hs_true(surgical_hs,"./v2/v2_d.csv")
+    # _execute_hs_true(surgical_hs,"./v2/v2_e.csv")
+    # _execute_hs_true(surgical_hs,"./v2/v2_f.csv")
+    # _execute_hs_true(surgical_hs,"./v2/v2_g.csv")
+    # _execute_hs_true(surgical_hs,"./v2/v2_h.csv")
+ 
   
 
 
+#####
+# Revisit g: which verbs?
+# also g: articles in front of some single nouns
+
+# is row 51 different from row 46? those verbs will be in 46 (l & g)
+
+
+
+
+'''
+NOTES:
+im retarted
+im autist
+
+
+
+'''
